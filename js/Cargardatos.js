@@ -1,13 +1,10 @@
 var miAplicacion = angular.module('miAplicacion',[]);
 
-miAplicacion.controller('mainController', function($scope){
-  $scope.lista = [
-    {id:'1',nombre:"ANA",apellido1:"ANSOLA",apellido2:"BAaaaRTET",ciclo:"APLICACIONES WEB",curso:"primero",seleccionado:false},
-    {id:'2',nombre:"SARA",apellido1:"ANSUATEGI",apellido2:"ETXABE",ciclo:"APLICACIONES WEB",curso:"segundo",seleccionado:true},
-    {id:'4',nombre:"ENEKO",apellido1:"ARRIETA",apellido2:"GABIOLA",ciclo:"APLICACIONES WEB",curso:"segundo",seleccionado:false},
-    {id:'5',nombre:"MIREN",apellido1:"BALZATEGI",apellido2:"ZUMELAGA",ciclo:"CUIDADOS AUX ENF",curso:"primero",seleccionado:false},
-    {id:'6',nombre:"ASIER",apellido1:"ETXEANDIA",apellido2:"RASIER",ciclo:"APLICACIONES WEB",curso:"segundo",seleccionado:false}
-  ];
+miAplicacion.controller('mainController', function($scope,$http){
+
+    $http.get('JSON/datosJSON.json').then(function (response){
+      $scope.lista = response.data;
+        //alert($scope.lista.length);
 
   $scope.misdatos = {
     id:"",
@@ -93,4 +90,5 @@ miAplicacion.controller('mainController', function($scope){
     $scope.VerFormBusqueda=false;
   }
 
+      });
 });

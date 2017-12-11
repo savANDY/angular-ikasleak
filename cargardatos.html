@@ -28,10 +28,10 @@
       <div id="izda" ng-show="verAgregaralumno==='true'">
         <form id="formagregar" ng-submit="agregar()">
           <span>ID</span><input type="text" ng-model="misdatos.id" disabled/><br>
-          <span>NOMBRE</span><input type="text" ng-model="misdatos.nombre" disabled/><br>
-          <span>APELLIDO1</span><input type="text" ng-model="misdatos.apellido1" disabled/><br>
-          <span>APELLIDO2</span><input type="text" ng-model="misdatos.apellido2" disabled/><br>
-          <span>CICLO</span><input type="text" ng-model="misdatos.ciclo" disabled/><br>
+          <span>NOMBRE</span><input type="text" ng-model="misdatos.nombre"/><br>
+          <span>APELLIDO1</span><input type="text" ng-model="misdatos.apellido1" /><br>
+          <span>APELLIDO2</span><input type="text" ng-model="misdatos.apellido2" /><br>
+          <span>CICLO</span><input type="text" ng-model="misdatos.ciclo" /><br>
           <span>CURSO</span>
             <select name="curso" ng-model="misdatos.curso" ng-disabled="misdatos.ciclo===''"/>
               <option value="primero">primero</option>
