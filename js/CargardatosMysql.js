@@ -5,6 +5,8 @@ miAplicacion.controller('mainController', function($scope,$http){
   $http.get("controlador/cCargardatos.php").then(function (response) {
     $scope.lista = response.data.records;
 
+    //alert(response.data);
+
     $scope.misdatos = {
       id:"",
       nombre:"",
@@ -47,23 +49,23 @@ $scope.agregar = function() {
 
   $http({url: "controlador/insertar_ikasle.php",
   method: "GET",
-  params: {value:id}
+  params: {nombre:$scope.misdatos.nombre,
+    apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
+    ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso}
 }).then(successCallback, errorCallback);
 
 function successCallback(response){
-  alert("Borrado " + id);
-  var elem = document.getElementById("ikasle"+id);
-  elem.parentNode.removeChild(elem);
+  //alert(response.data);
+
+  alert({id:$scope.misdatos.id,nombre:$scope.misdatos.nombre,
+    apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
+    ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso});
+
+  // $scope.lista.push({response.data});
 }
 function errorCallback(error){
   console.error('Error occurred:', response.status, response.data);
 }
-
-
-  $scope.lista.push({id:$scope.misdatos.id,nombre:$scope.misdatos.nombre,
-    apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
-    ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso});
-
     $scope.misdatos.id++;
     $scope.misdatos.nombre='';
     $scope.misdatos.apellido1='';

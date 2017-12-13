@@ -38,4 +38,19 @@ class modelo_ikasle{
     $this->link->close();
     return $this->ikasle;
   }
+
+  public function insertar_ikasle($nombre,$apellido1,$apellido2,$ciclo,$curso) {
+    $sql = "CALL insertar_ikasle('$nombre','$apellido1','$apellido2','$ciclo','$curso')";
+    $consulta=$this->link->query($sql);
+    $this->outp = "";
+    $rs = mysqli_fetch_array($consulta, MYSQLI_ASSOC);
+    $this->outp .= 'id:"'  . $rs["id"]                . '",';
+    $this->outp .= 'nombre:"'   . $rs["nombre"]        . '",';
+    $this->outp .= 'apellido1:"'   . $rs["apellido1"]  . '",';
+    $this->outp .= 'apellido2:"'   . $rs["apellido2"]  . '",';
+    $this->outp .= 'ciclo:"'   . $rs["ciclo"]          . '",';
+    $this->outp .= 'curso:"'. $rs["curso"]             . '"';
+
+    return $this->outp;
+  }
 }
