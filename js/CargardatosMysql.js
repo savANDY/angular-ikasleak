@@ -4,9 +4,7 @@ miAplicacion.controller('mainController', function($scope,$http){
 
   $http.get("controlador/cCargardatos.php").then(function (response) {
     $scope.lista = response.data.records;
-
     //alert(response.data);
-
     $scope.misdatos = {
       id:"",
       nombre:"",
@@ -18,7 +16,6 @@ miAplicacion.controller('mainController', function($scope,$http){
     //CALCULAR NUEVO ID
     $scope.ultimoID=$scope.lista[parseInt($scope.lista.length)-1].id;
     $scope.misdatos.id = parseInt($scope.ultimoId) + 1;
-
   });
 
   $scope.verAgregaralumno='false';
@@ -45,7 +42,6 @@ miAplicacion.controller('mainController', function($scope,$http){
     $scope.misdatos.apellido2=response.data.apellido2;
     $scope.misdatos.ciclo=response.data.ciclo;
     $scope.misdatos.curso=response.data.curso;
-
     $scope.verAgregaralumno='false';
     $scope.verEditaralumno='true';
     $scope.VerMenu='false';
@@ -56,9 +52,8 @@ miAplicacion.controller('mainController', function($scope,$http){
   }
 }
 
-
-  $scope.BorrarEste = function(id) {
-    if (confirm('¿Seguro que quieres borrar el alumno con id: ' + id + '?')) {
+$scope.BorrarEste = function(id) {
+  if (confirm('¿Seguro que quieres borrar el alumno con id: ' + id + '?')) {
     $http({url: "controlador/borrar_ikasle.php",
     method: "GET",
     params: {value:id}
@@ -82,30 +77,27 @@ $scope.agregar = function() {
   params: {nombre:$scope.misdatos.nombre,
     apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
     ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso}
-}).then(successCallback, errorCallback);
+  }).then(successCallback, errorCallback);
 
-function successCallback(response){
-  alert(response.data);
-
-  $scope.lista.push({id:response.data,nombre:$scope.misdatos.nombre,
-    apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
-    ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso});
-    $scope.misdatos.nombre='';
-    $scope.misdatos.apellido1='';
-    $scope.misdatos.apellido2='';
-    $scope.misdatos.ciclo='';
-    $scope.misdatos.curso='';
-    $scope.verAgregaralumno='false';
-    $scope.VerMenu="true";
-  //$scope.lista.push(response.data);
-}
-function errorCallback(error){
-  console.error('Error occurred:', response.status, response.data);
-}
-
+  function successCallback(response){
+    alert(response.data);
+    
+    $scope.lista.push({id:response.data,nombre:$scope.misdatos.nombre,
+      apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
+      ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso});
+      $scope.misdatos.nombre='';
+      $scope.misdatos.apellido1='';
+      $scope.misdatos.apellido2='';
+      $scope.misdatos.ciclo='';
+      $scope.misdatos.curso='';
+      $scope.verAgregaralumno='false';
+      $scope.VerMenu="true";
+      //$scope.lista.push(response.data);
+    }
+    function errorCallback(error){
+      console.error('Error occurred:', response.status, response.data);
+    }
   };
-
-
 
   $scope.editar = function() {
 
@@ -114,43 +106,38 @@ function errorCallback(error){
     params: {id:$scope.misdatos.id,nombre:$scope.misdatos.nombre,
       apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
       ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso}
-  }).then(successCallback, errorCallback);
+    }).then(successCallback, errorCallback);
 
-  function successCallback(response){
-    //alert(response.data);
-    //alert($scope.misdatos.id);
+    function successCallback(response){
+      //alert(response.data);
+      //alert($scope.misdatos.id);
 
-    for (i = 0; i < $scope.lista.length; i++) {
-      if ($scope.lista[i].id == $scope.misdatos.id) {
-        $scope.lista[i].nombre = $scope.misdatos.nombre;
-        $scope.lista[i].apellido1 = $scope.misdatos.apellido1;
-        $scope.lista[i].apellido2 = $scope.misdatos.apellido2;
-        $scope.lista[i].ciclo = $scope.misdatos.ciclo;
-        $scope.lista[i].curso = $scope.misdatos.curso;
+      for (i = 0; i < $scope.lista.length; i++) {
+        if ($scope.lista[i].id == $scope.misdatos.id) {
+          $scope.lista[i].nombre = $scope.misdatos.nombre;
+          $scope.lista[i].apellido1 = $scope.misdatos.apellido1;
+          $scope.lista[i].apellido2 = $scope.misdatos.apellido2;
+          $scope.lista[i].ciclo = $scope.misdatos.ciclo;
+          $scope.lista[i].curso = $scope.misdatos.curso;
+        }
       }
+      $scope.misdatos.nombre='';
+      $scope.misdatos.apellido1='';
+      $scope.misdatos.apellido2='';
+      $scope.misdatos.ciclo='';
+      $scope.misdatos.curso='';
+      $scope.verEditaralumno='false';
+      $scope.VerMenu="true";
+      //alert("Editado con exito");
+      // $scope.lista.push({response.data});
     }
-    //$scope.misdatos.id='';
-    $scope.misdatos.nombre='';
-    $scope.misdatos.apellido1='';
-    $scope.misdatos.apellido2='';
-    $scope.misdatos.ciclo='';
-    $scope.misdatos.curso='';
-    $scope.verEditaralumno='false';
-    $scope.VerMenu="true";
-
-    //alert("Editado con exito");
-
-    // $scope.lista.push({response.data});
-  }
-  function errorCallback(error){
-    console.error('Error occurred:', response.status, response.data);
-  }
-
-    };
-
+    function errorCallback(error){
+      console.error('Error occurred:', response.status, response.data);
+    }
+  };
 
   $scope.cancelar = function() {
-  //  alert($scope.misdatos.id);
+    //  alert($scope.misdatos.id);
     $scope.misdatos.id = '';
     $scope.misdatos.nombre = '';
     $scope.misdatos.apellido1='';
@@ -161,31 +148,6 @@ function errorCallback(error){
     $scope.verEditaralumno='false';
     $scope.VerMenu="true";
   };
-
-  $scope.Eliminarlista = function() {
-    $scope.lista = [];
-  };
-
-  $scope.Eliminaralumno = function() {
-    var milista= $scope.lista;
-    $scope.lista = [];
-    angular.forEach(milista, function(item){
-      if (!item.seleccionado){
-        $scope.lista.push(item);
-      }
-    });
-    $scope.ultimoId=$scope.lista[parseInt($scope.lista.length)-1].id;
-    $scope.misdatos.id = parseInt($scope.ultimoId) + 1;
-  };
-
-  $scope.cambiar = function() {
-    for (i = 0; i < $scope.lista.length; i++) {
-      if($scope.lista[i].id==$scope.misdatos.id){
-        $scope.lista[i].nombre = $scope.misdatos.nombre;
-        $scope.lista[i].edad = $scope.misdatos.edad;
-      }
-    }
-  }
 
   //codigo de busqueda se busca por cualquiera de las caract. Primero se da al boton Iniciar
   // busqueda para ver los campos de busqueda y luego se filtra
@@ -198,6 +160,4 @@ function errorCallback(error){
     $scope.TEXTObusqueda="";
     $scope.VerFormBusqueda=false;
   }
-
-
 });
