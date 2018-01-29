@@ -35,7 +35,7 @@ miAplicacion.controller('mainController', function($scope,$http){
 
   function successCallback(response){
 
-    //alert(response.data);
+    alert(JSON.stringify(response.data));
     $scope.misdatos.id = id;
     $scope.misdatos.nombre=response.data.nombre;
     $scope.misdatos.apellido1=response.data.apellido1;
@@ -81,7 +81,7 @@ $scope.agregar = function() {
 
   function successCallback(response){
     alert(response.data);
-    
+
     $scope.lista.push({id:response.data,nombre:$scope.misdatos.nombre,
       apellido1:$scope.misdatos.apellido1,apellido2:$scope.misdatos.apellido2,
       ciclo:$scope.misdatos.ciclo,curso:$scope.misdatos.curso});
